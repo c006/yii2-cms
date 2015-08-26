@@ -36,12 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'     => 'layout.name'
             ],
             'url:url',
+            'in_menu',
             'active',
             [
                 'attribute' => 'Sections',
                 'format'    => 'raw',
                 'value'     => function ($model) {
-                    return Html::a(Yii::t('app', 'edit'), ['/cms/sections/index', 'id' => $model->id], ['class' => 'btn btn-success']);
+                    $html = '<div class="nowrap" >';
+                    $html .= Html::a(Yii::t('app', 'edit'), ['/cms/sections/index', 'CmsSections[cms_id]' => $model->id, 'sort' => 'position'], ['class' => 'btn btn-success']);
+                    $html .= ' ' . Html::a(Yii::t('app', 'files'), ['/cms/files/index', 'CmsSections[cms_id]' => $model->id], ['class' => 'btn btn-success']);
+                    $html .= '</div>';
+
+                    return $html;
                 }
             ],
 

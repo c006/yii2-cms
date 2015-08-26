@@ -12,8 +12,8 @@ class ImageHelper
     private $image = [];
     private $sizes = [
         'sml' => 200,
-        'med' => 400,
-        'lrg' => 800,
+        'med' => 600,
+        'lrg' => 1000,
     ];
 
     function __construct($base_path = FALSE)
@@ -31,10 +31,11 @@ class ImageHelper
         ];
 
         $size = self::getNewImageSize('lrg');
-        $file = $file;
         $image = $this->imagine->open($this->image['image']);
         $image->resize(new Box($size['w'], $size['h']));
         $image->save($this->base_path . '/' . $file, ['quality' => 90]);
+
+        // die("CHECK");
     }
 
     /**
@@ -52,13 +53,19 @@ class ImageHelper
             /* W > H */
             if ($this->image['size'][0] > $this->image['size'][1]) {
                 $ratio = $this->image['size'][1] / $this->image['size'][0];
+                $nw = $nh = ($this->image['size'][0] < $nw) ? $this->image['size'][0] : $nw;
                 $nh = $nw * $ratio;
+                // die("W > H");
             } else {
                 /* H > W */
                 $ratio = $this->image['size'][0] / $this->image['size'][1];
-                $nh = $nh * $ratio;
+                $nw = $nh = ($this->image['size'][1] < $nh) ? $this->image['size'][1] : $nh;
+                $nw = $nh * $ratio;
+                //die("H > W : ". $nh);
             }
         }
+
+//        die($nw .' x '. $nh );
 
         return ['w' => $nw, 'h' => $nh];
     }

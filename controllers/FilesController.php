@@ -82,6 +82,7 @@ class FilesController extends Controller
 
             $file = $_FILES['CmsFiles']['name']['file'];
             $suffix = ImageHelper::getFileExtension($file);
+            $model->cms_id = $_POST['CmsFiles']['cms_id'];
             $model->name = $_POST['CmsFiles']['name'];
             $model->file = preg_replace('/[\s|\.]+/', '-', microtime(FALSE)) . '.' . $suffix;
             $model->file_type = $suffix;
@@ -111,8 +112,24 @@ class FilesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $file = $model->file;
+        if ($model->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if (isset($_FILES['CmsFiles'])) {
+                $image = new ImageHelper();
+                $file = $_FILES['CmsFiles']['name']['file'];
+                $suffix = ImageHelper::getFileExtension($file);
+                $model->cms_id = $_POST['CmsFiles']['cms_id'];
+                $model->name = $_POST['CmsFiles']['name'];
+                $model->file = preg_replace('/[\s|\.]+/', '-', microtime(FALSE)) . '.' . $suffix;
+                $model->file_type = $suffix;
+                $image->saveImage($model->file, $_FILES['CmsFiles']['tmp_name']['file']);
+            } else {
+                $model->file = $file;
+            }
+
+            $model->save();
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [

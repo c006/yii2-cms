@@ -26,7 +26,9 @@ class AppAssets extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $js = [];
+    public $js = [
+        'js/cms-media.js'
+    ];
 
     /**
      * @inheritdoc

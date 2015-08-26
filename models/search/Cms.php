@@ -18,7 +18,7 @@ class Cms extends CmsModel
     public function rules()
     {
         return [
-            [['id', 'css_id', 'active'], 'integer'],
+            [['id', 'css_id', 'in_menu', 'active'], 'integer'],
             [['name', 'url'], 'safe'],
         ];
     }
@@ -56,9 +56,10 @@ class Cms extends CmsModel
         }
 
         $query->andFilterWhere([
-            'id'     => $this->id,
-            'css_id' => $this->css_id,
-            'active' => $this->active,
+            'id'      => $this->id,
+            'css_id'  => $this->css_id,
+            'in_menu' => $this->in_menu,
+            'active'  => $this->active,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

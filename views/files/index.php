@@ -23,12 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Fonts'), ['/cms/fonts/index'], ['class' => 'btn btn-primary']) ?>
     </p>
 
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
+        'layout' => "{summary}{pager}\n{items}\n{pager}",
+
+
         'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
+            [
+                'attribute' => 'cms_id',
+                'value'     => 'cms.name'
+            ],
             [
                 'attribute' => 'Code',
                 'format'    => 'raw',

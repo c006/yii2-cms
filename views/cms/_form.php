@@ -27,6 +27,8 @@ use yii\helpers\Html;
     $model_link = ArrayHelper::map($model_link, 'id', 'selector');
     echo $form->field($model, 'css_id')->dropDownList($model_link)->label('Title Css') ?>
 
+    <?= $form->field($model, 'in_menu')->dropDownList(['No', 'Yes']) ?>
+
     <?= $form->field($model, 'active')->dropDownList(['No', 'Yes']) ?>
 
     <div class="form-group">

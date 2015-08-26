@@ -2,6 +2,7 @@
 
 /** @var $model array */
 
+use c006\alerts\Alerts;
 use c006\cms\assets\AppHelper;
 
 $sections = AppHelper::getSections($model['id']);
@@ -11,8 +12,13 @@ if (sizeof($sections) > 1) {
     foreach ($sections as $index => $item) {
         $sections[ $index ]['html'] = AppHelper::addImages($item['html']);
     }
+} elseif (isset($sections[0]['html'])) {
+    $sections[0]['html'] = AppHelper::addImages($sections[0]['html']);
 } else {
-    $sections['html'] = AppHelper::addImages($sections['html']);
+    Alerts::setMessage('Page not found');
+    Alerts::setAlertType(Alerts::ALERT_WARNING);
+    Alerts::setCountdown(5);
+    Yii::$app->response->redirect(['/', 'id' => 302]);
 }
 
 ?>
@@ -93,11 +99,30 @@ if (sizeof($sections) > 1) {
         </script>
     <?php /* SINGLE SECTION */
     else : ?>
-        <div id="CMS-tab-<?= $sections['id'] ?>" class="CMS-tabs-content"><?= $sections['html'] ?></div>
+        <div id="CMS-tab-<?= $sections[0]['id'] ?>" class="CMS-tabs-content"><?= $sections[0]['html'] ?></div>
     <?php endif ?>
 
-
 </div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        var cms = new CmsMedia();
+        cms.set_container_id('div.CMS');
+        cms.setup();
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

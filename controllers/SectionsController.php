@@ -74,7 +74,7 @@ class SectionsController extends Controller
         $model = new CmsSections();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id, 'CmsSections[cms_id]' => $model->cms_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -95,7 +95,7 @@ class SectionsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id, 'CmsSections[cms_id]' => $model->cms_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

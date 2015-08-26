@@ -24,15 +24,15 @@ class AppHelper
     {
         $array = [];
         $url = '/images/cms';
-        preg_match_all('/({IMG_[0-9]+})/', $html, $matches);
+        preg_match_all('/\{IMG_[0-9]+}/', $html, $matches);
 
-        foreach ($matches as $k => $item) {
-            if (isset($item[0])) {
-                $array[ $item[0] ] = self::getImageFile(preg_replace('/[^0-9]/', '', $item[0]));
+        if (sizeof($matches[0])) {
+            foreach ($matches[0] as $k => $v) {
+                $array[ $v ] = self::getImageFile(preg_replace('/[^0-9]/', '', $v));
             }
-        }
-        foreach ($array as $k => $v) {
-            $html = str_replace($k, $url . '/' . $v, $html);
+            foreach ($array as $k => $v) {
+                $html = str_replace($k, $url . '/' . $v, $html);
+            }
         }
 
         return $html;
@@ -175,7 +175,6 @@ class AppHelper
             ->orderBy('position')
             ->asArray()
             ->all();
-
         if (sizeof($model)) {
             return $model;
         }

@@ -18,8 +18,8 @@ class CmsSections extends CmsSectionsModel
     public function rules()
     {
         return [
-            [['id', 'cms_id', 'position'], 'integer'],
-            [['name', 'html'], 'safe'],
+            [['id', 'position'], 'integer'],
+            [['name', 'cms_id', 'html'], 'safe'],
         ];
     }
 
@@ -55,14 +55,18 @@ class CmsSections extends CmsSectionsModel
             return $dataProvider;
         }
 
+        $query->joinWith('cms');
+
         $query->andFilterWhere([
             'id'       => $this->id,
-            'cms_id'   => $this->cms_id,
+//            'cms_id'   => $this->cms_id,
             'position' => $this->position,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'html', $this->html]);
+            ->andFilterWhere(['like', 'html', $this->html])
+            ->orFilterWhere(['like', 'cms.name', $this->cms_id])
+            ->orFilterWhere(['like', 'cms.id', $this->cms_id]);
 
         return $dataProvider;
     }

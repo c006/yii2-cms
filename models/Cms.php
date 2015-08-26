@@ -12,6 +12,7 @@ use Yii;
  * @property string $name
  * @property integer $css_id
  * @property string $url
+ * @property integer $in_menu
  * @property integer $active
  *
  * @property CmsCss $css
@@ -34,7 +35,7 @@ class Cms extends \yii\db\ActiveRecord
     {
         return [
             [['layout_id', 'name', 'url'], 'required'],
-            [['layout_id', 'css_id', 'active'], 'integer'],
+            [['layout_id', 'css_id', 'in_menu', 'active'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['url'], 'string', 'max' => 200],
             [['css_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => CmsCss::className(), 'targetAttribute' => ['css_id' => 'id']],
@@ -53,6 +54,7 @@ class Cms extends \yii\db\ActiveRecord
             'name'      => Yii::t('app', 'Name'),
             'css_id'    => Yii::t('app', 'Css ID'),
             'url'       => Yii::t('app', 'Url'),
+            'in_menu'   => Yii::t('app', 'Use in Menu'),
             'active'    => Yii::t('app', 'Active'),
         ];
     }

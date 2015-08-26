@@ -11,11 +11,15 @@ class PageController extends Controller
 
     public function actionIndex($id = 0)
     {
+        if (!$id) {
+            $id = Yii::$app->request->getQueryParam('id');
+        }
+
         parent::init();
         AppAssets::register($this->getView());
 
         $model = Cms::find()
-            ->where([])
+            ->where(['id' => $id])
             ->asArray()
             ->one();
 

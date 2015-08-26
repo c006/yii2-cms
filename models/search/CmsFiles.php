@@ -19,7 +19,7 @@ class CmsFiles extends CssFilesModel
     {
         return [
             [['id'], 'integer'],
-            [['name', 'file', 'file_type'], 'safe'],
+            [['cms_id', 'name', 'file', 'file_type'], 'safe'],
         ];
     }
 
@@ -55,13 +55,17 @@ class CmsFiles extends CssFilesModel
             return $dataProvider;
         }
 
+        $query->joinWith('cms');
+
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'file', $this->file])
-            ->andFilterWhere(['like', 'file_type', $this->file_type]);
+            ->andFilterWhere(['like', 'file_type', $this->file_type])
+            ->orFilterWhere(['like', 'cms.name', $this->cms_id])
+            ->orFilterWhere(['like', 'cms.id', $this->cms_id]);
 
         return $dataProvider;
     }

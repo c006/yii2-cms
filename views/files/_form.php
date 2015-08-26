@@ -1,6 +1,7 @@
 <?php
 
 use c006\activeForm\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -11,6 +12,11 @@ use yii\helpers\Html;
 <div class="css-files-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+
+    <?
+    $model_link = \c006\cms\models\Cms::find()->orderBy('name')->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'name');
+    echo $form->field($model, 'cms_id')->dropDownList($model_link)->label('CMS Page') ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => TRUE]) ?>
 

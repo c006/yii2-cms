@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             [
-                'attribute' => 'Page',
+                'attribute' => 'cms_id',
                 'value'     => 'cms.name'
             ],
             'name',
