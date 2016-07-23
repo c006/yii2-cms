@@ -33,10 +33,7 @@ class AppAssets extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
+    public $depends = [];
 
     /**
      * @var array
