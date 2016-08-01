@@ -1,4 +1,5 @@
 <?php
+
 namespace c006\cms\controllers;
 
 use c006\cms\assets\AppAssets;
@@ -6,8 +7,20 @@ use c006\cms\models\Cms;
 use Yii;
 use yii\web\Controller;
 
-class PageController extends Controller
+
+class FrontendController extends Controller
 {
+
+    function init()
+    {
+
+    }
+
+    public function behaviors()
+    {
+        return [];
+    }
+
 
     public function actionIndex($id = 0)
     {
@@ -27,6 +40,5 @@ class PageController extends Controller
             'model' => $model
         ]);
     }
-
 
 }

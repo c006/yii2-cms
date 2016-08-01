@@ -5,6 +5,7 @@ namespace c006\cms\controllers;
 use c006\cms\models\Cms;
 use c006\cms\models\search\Cms as CmsSearch;
 use c006\core\assets\CoreHelper;
+use c006\url\assets\AppAliasUrl;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -66,6 +67,12 @@ class CmsController extends Controller
         $model = new Cms();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            /* Add Alias-URL if exists */
+            if (class_exists('c006\url\controllers\UrlController')) {
+                AppAliasUrl::addAlias($model->url, 'cms/frontend/index/id/' . $model->id);
+            }
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -87,6 +94,12 @@ class CmsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            /* Add Alias-URL if exists */
+            if (class_exists('c006\url\controllers\UrlController')) {
+                AppAliasUrl::addAlias($model->url, 'cms/frontend/index/id/' . $model->id);
+            }
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -119,6 +119,10 @@ class m000000_000000_c006_cms extends Migration
         $this->addForeignKey('fk_cms_css_4736_01','{{%cms}}', 'css_id', '{{%cms_css}}', 'id', 'CASCADE', 'NO ACTION' );
         $this->execute('SET foreign_key_checks = 1;');
 
+        $this->execute('SET foreign_key_checks = 0');
+        $this->insert('{{%cms_layout}}', ['id' => '1', 'name' => 'Tabs Top']);
+        $this->insert('{{%cms_layout}}', ['id' => '2', 'name' => 'Side Bar']);
+        $this->execute('SET foreign_key_checks = 1;');
 
     }
 
