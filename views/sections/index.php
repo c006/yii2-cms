@@ -16,33 +16,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="title-large"><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Cms Sections'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Pages'), ['/cms/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'CSS'), ['/cms/css/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Fonts'), ['/cms/fonts/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Files'), ['/cms/files/index'], ['class' => 'btn btn-primary']) ?>
-    </p>
+    <div class="item-container margin-top-30 margin-bottom-20">
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $searchModel,
-        'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
+        <?= Html::a(Yii::t('app', 'Create Cms Sections'), ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Pages'), ['/cms/index'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'CSS'), ['/cms/css/index'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'Fonts'), ['/cms/fonts/index'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'Files'), ['/cms/files/index'], ['class' => 'btn btn-secondary']) ?>
 
-            'id',
-            [
-                'attribute' => 'cms_id',
-                'value'     => 'cms.name'
-            ],
-            'name',
+
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel'  => $searchModel,
+            'columns'      => [
+                ['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                [
+                    'attribute' => 'cms_id',
+                    'value'     => 'cms.name'
+                ],
+                'name',
 //            'html:ntext',
-            'position',
-            [
-                'class'    => 'yii\grid\ActionColumn',
-                'template' => '<div class="nowrap">{update} {delete}</div>'
+                'position',
+                [
+                    'class'    => 'yii\grid\ActionColumn',
+                    'template' => '<div class="nowrap">{update} {delete}</div>'
+                ],
             ],
-        ],
-    ]); ?>
+        ]); ?>
 
+    </div>
 </div>

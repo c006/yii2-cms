@@ -1,6 +1,6 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use c006\cms\assets\AppHelper;
 use c006\core\assets\CoreHelper;
 use yii\helpers\ArrayHelper;
@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model c006\cms\models\CmsSections */
-/* @var $form c006\activeForm\ActiveForm; */
+/* @var $form yii\widgets\ActiveForm; */
 ?>
 
 <div class="cms-sections-form">
@@ -27,7 +27,7 @@ use yii\helpers\Html;
     <?= $form->field($model, 'position')->dropDownList(CoreHelper::minMaxRange(1, sizeof(AppHelper::getSections($model->cms_id)) + 1)) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-secondary' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

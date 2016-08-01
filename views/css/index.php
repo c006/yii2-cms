@@ -17,30 +17,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="title-large"><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Add Css'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Pages'), ['/cms/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Fonts'), ['/cms/fonts/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Files'), ['/cms/files/index'], ['class' => 'btn btn-primary']) ?>
+    <div class="item-container margin-top-30 margin-bottom-20">
 
-        <?= Html::a(Yii::t('app', 'Online CSS Generators'), 'http://www.sitepoint.com/10-best-css3-code-generators/', ['class' => 'btn btn-success float-right', 'target' => '_blank']) ?>
-    </p>
+        <?= Html::a(Yii::t('app', 'Add Css'), ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Pages'), ['/cms/index'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'Fonts'), ['/cms/fonts/index'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'Files'), ['/cms/files/index'], ['class' => 'btn btn-secondary']) ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $searchModel,
-        'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
+        <?= Html::a(Yii::t('app', 'Online CSS Generators'), 'http://www.sitepoint.com/10-best-css3-code-generators/', ['class' => 'btn btn-secondary float-right', 'target' => '_blank']) ?>
 
-            'id',
-            'selector',
-            'css:ntext',
 
-            [
-                'class'    => 'yii\grid\ActionColumn',
-                'template' => '<div class="nowrap">{update} {delete}</div>'
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel'  => $searchModel,
+            'columns'      => [
+                ['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                'selector',
+                'css:ntext',
+
+                [
+                    'class'    => 'yii\grid\ActionColumn',
+                    'template' => '<div class="nowrap">{update} {delete}</div>'
+                ],
             ],
-        ],
-    ]); ?>
+        ]); ?>
 
+    </div>
 </div>
