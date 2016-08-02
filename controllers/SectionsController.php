@@ -73,7 +73,17 @@ class SectionsController extends Controller
     {
         $model = new CmsSections();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        if (isset($_POST['CmsSections'])) {
+
+            $post = $_POST['CmsSections'];
+
+            $sql = "INSERT INTO  cms_sections (`cms_id`,`name`,`html`,`position`)
+                VALUES (" . $post['cms_id'] . ",'" . trim($post['name']) . "','" . addslashes($post['html']) . "')";
+
+            $connection = Yii::$app->getDb();
+            $connection->createCommand($sql)->query();
+
             return $this->redirect(['index', 'id' => $model->id, 'CmsSections[cms_id]' => $model->cms_id]);
         } else {
             return $this->render('create', [
@@ -94,7 +104,16 @@ class SectionsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (isset($_POST['CmsSections'])) {
+
+            $post = $_POST['CmsSections'];
+
+            $sql = "UPDATE cms_sections SET `cms_id` = " . $post['cms_id'] . ", `name` = '" . trim($post['name']) . "', `html` = '" . addslashes($post['html']) . "', `position` = " . $post['position'] . " WHERE `id` = " . $id;
+
+            $connection = Yii::$app->getDb();
+            $connection->createCommand($sql)->query();
+
+
             return $this->redirect(['index', 'id' => $model->id, 'CmsSections[cms_id]' => $model->cms_id]);
         } else {
             return $this->render('update', [
