@@ -39,6 +39,10 @@ class AppHelper
     }
 
 
+    /**
+     * @param $css
+     * @return string
+     */
     static public function cleanCss($css)
     {
         $out = '';
