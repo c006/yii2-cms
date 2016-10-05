@@ -18,7 +18,7 @@ class CmsController extends Controller
 
     function init()
     {
-        if (CoreHelper::checkLogin()) {
+        if (CoreHelper::isGuest()) {
             return $this->redirect('/user/login');
         }
     }
