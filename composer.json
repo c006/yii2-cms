@@ -1,0 +1,25 @@
+{
+  "name": "c006/yii2-cms",
+  "description": "CMS Module",
+  "type": "yii2-extension",
+  "version": "v2.0",
+  "min-stability": "dev",
+  "keywords": [
+    "yii2"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jon Chambers",
+      "email": "jchambers.dev@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "c006/yii2-core": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "c006\\cms\\": ""
+    }
+  }
+}
